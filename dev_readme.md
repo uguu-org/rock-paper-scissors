@@ -30,8 +30,8 @@ As to the optimizations, most of them involve reducing amount of time handling c
 
 Some extra features are hidden in the game selection screen.  All of them are activated by holding a direction button, and pressing "down" will dismiss the popup window.
 
-*Accelerometer test*: Hold "up" for 3 seconds to activate accelerometer test.  The top numbers are raw accelerometer readings, and the bottom numbers are how they will be interpreted as direction vectors.  "zero" shows the zero orientation that is set by the user via "zero tilt" menu option.
+**Accelerometer test**: Hold "up" for 3 seconds to activate accelerometer test.  The top numbers are raw accelerometer readings, and the bottom numbers are how they will be interpreted as direction vectors.  "zero" shows the zero orientation that is set by the user via "zero tilt" menu option.
 
-*Crank test*: Hold "right" for 3 seconds to activate crank test.  Top number is raw crank reading, bottom number is the interpreted angle result.
+**Crank test**: Hold "right" for 3 seconds to activate crank test.  Top number is raw crank reading, bottom number is the interpreted angle result.
 
-*Population test*: Hold "left" for 3 seconds to activate population test.  This allows the game to start with fewer than the default 99 objects for each group.  Hold direction button and crank to adjust.
+**Population test**: Hold "left" for 3 seconds to activate population test.  This allows the game to start with fewer than the default 99 objects for each group.  Hold direction button and crank to adjust.

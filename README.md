@@ -4,7 +4,7 @@ The classic three way game in battle royale style, pitting 99 rocks against 99 p
 
 https://uguu-org.itch.io/rock-paper-scissors
 
-For developer documentation see [dev_readme.md](dev_readme.md).
+For developer documentation, see [dev_readme.md](dev_readme.md).
 
 ## Controls
 
@@ -12,27 +12,27 @@ Four modes are selectable by pressing D-pad buttons:
 
 ![](doc/game_select.gif)
 
-*Spectate*: Watch rocks and papers and scissors fight it out automatically all on their own, no input required.  New game will start automatically after a winner has been determined.  This is the default.
+**Spectate**: Watch rocks and papers and scissors fight it out automatically all on their own, no input required.  New game will start automatically after a winner has been determined.  This is the default.
 
-*Tilt to move*: Control rock with the accelerometer.  Hold the console level to make the rock stand still, tilt more to make the rock move faster.
+**Tilt to move**: Control rock with the accelerometer.  Hold the console level to make the rock stand still, tilt more to make the rock move faster.
 
-*Move with D-pad*: Control paper with D-pad.  Press a direction button to blow the paper toward that direction.  Mash direction buttons to make it go faster.
+**Move with D-pad**: Control paper with D-pad.  Press a direction button to blow the paper toward that direction.  Mash direction buttons to make it go faster.
 
-*Turn with crank*: Control scissors with crank.  Scissors will move continuously in the direction set by the crank.
+**Turn with crank**: Control scissors with crank.  Scissors will move continuously in the direction set by the crank.
 
-Press *A* to start with the selected mode.
+Press **A** to start with the selected mode.
 
 ## Gameplay
 
 ![](doc/screen.png)
 
-You can select a different object to follow by pressing *A* or *B*.
+You can select a different object to follow by pressing **A** or **B**.
 
 ## Menu options
 
-*Reset*: Go back to mode selection screen.
+**Reset**: Go back to mode selection screen.
 
-*Zero tilt*: Set current device orientation to be the zero orientation for interpreting rock inputs.  This may help making rock controls more ergonomic, but note that accelerometer will be more sensitive when the device is physically level.
+**Zero tilt**: Set current device orientation to be the zero orientation for interpreting rock inputs.  This may help making rock controls more ergonomic, but note that accelerometer will be more sensitive when the device is physically level.
 
 ## FAQ
 
