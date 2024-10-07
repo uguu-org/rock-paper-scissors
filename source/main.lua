@@ -799,7 +799,7 @@ local function init_walls_and_floors()
 			--   +---+---+---+
 			--   |   | 3 |   |
 			--   +---+---+---+  Bits 0..3 encode adjacency.
-			--   | 2 |   | 0 |  Bits 4..5 encode variations.
+			--   | 2 |   | 0 |  Bits 4..6 encode variations.
 			--   +---+---+---+
 			--   |   | 1 |   |
 			--   +---+---+---+
@@ -1349,7 +1349,7 @@ local function remove_wall_tile(tx, ty)
 	--   +---+---+---+
 	--   |   | 3 |   |
 	--   +---+---+---+  Bits 0..3 encode adjacency.
-	--   | 2 |   | 0 |  Bits 4..5 encode variations.
+	--   | 2 |   | 0 |  Bits 4..6 encode variations.
 	--   +---+---+---+
 	--   |   | 1 |   |
 	--   +---+---+---+
@@ -2123,7 +2123,7 @@ assert(run_benchmarks())
 -- This is used to check heuristic tweaks to see how they affect
 -- auto-controlled objects (generally we would only accept changes
 -- that reduce the average or median number of game steps).  It also serves
--- as a sort of stress test to- make sure we don't trip over any assertions.
+-- as a sort of stress test to make sure we don't trip over any assertions.
 --
 -- To use, wait for game to finish loading and running benchmarks, pause
 -- the game, and then run this in the console:
