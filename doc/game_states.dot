@@ -1,0 +1,12 @@
+digraph G {
+	node [style=filled,fillcolor=white]
+
+   game_select -> game_init [label="A or B"]
+   game_init -> game_loop
+   game_loop -> game_complete
+   game_loop -> game_over
+   game_complete -> game_init [label="A"]
+   game_over -> game_init [label="A"]
+   game_complete -> game_select [label="B"]
+   game_over -> game_select [label="B"]
+}

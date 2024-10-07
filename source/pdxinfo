@@ -1,0 +1,7 @@
+name=Rock Paper Scissors
+author=uguu.org
+description=Rock Paper Scissors
+bundleID=org.uguu.RockPaperScissors
+version=0.1
+buildNumber=1
+imagePath=launcher/

@@ -1,0 +1,9 @@
+data/*.png
+data/*.exe
+data/*.o
+data/*.lua
+data/t_*
+data/test_passed.*
+release_source/
+rock_paper_scissors.pdx/
+rock_paper_scissors.zip
