@@ -1,5 +1,5 @@
 digraph G {
-	node [style=filled,fillcolor=white]
+   node [style=filled,fillcolor=white]
 
    game_select -> game_init [label="A or B"]
    game_init -> game_loop
