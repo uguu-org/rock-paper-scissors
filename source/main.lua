@@ -1076,16 +1076,39 @@ end
 -- Given a nonzero vector, compute direction angle to reach that position.
 local function get_direction(dx, dy)
 	assert(dx ~= 0 or dy ~= 0)
-	if abs(dx) >= abs(dy) then
-		if dx > 0 then
-			return coarse_atan[coarse_atan_steps][coarse_atan_steps * dy // dx]
+
+	-- The conditions below are unrolled for each quadrant.  We could have
+	-- done this in just 10 lines if we didn't do that, but benchmark suggests
+	-- that we save a few microseconds doing it this way.
+	if dx < 0 then
+		if dy < 0 then
+			if dx < dy then
+				return coarse_atan[-coarse_atan_steps][-coarse_atan_steps * dy // dx]
+			else
+				return coarse_atan[-coarse_atan_steps * dx // dy][-coarse_atan_steps]
+			end
+		else
+			if -dx > dy then
+				return coarse_atan[-coarse_atan_steps][-coarse_atan_steps * dy // dx]
+			else
+				return coarse_atan[coarse_atan_steps * dx // dy][coarse_atan_steps]
+			end
 		end
-		return coarse_atan[-coarse_atan_steps][-coarse_atan_steps * dy // dx]
+	else
+		if dy < 0 then
+			if dx > -dy then
+				return coarse_atan[coarse_atan_steps][coarse_atan_steps * dy // dx]
+			else
+				return coarse_atan[-coarse_atan_steps * dx // dy][-coarse_atan_steps]
+			end
+		else
+			if dx > dy then
+				return coarse_atan[coarse_atan_steps][coarse_atan_steps * dy // dx]
+			else
+				return coarse_atan[coarse_atan_steps * dx // dy][coarse_atan_steps]
+			end
+		end
 	end
-	if dy > 0 then
-		return coarse_atan[coarse_atan_steps * dx // dy][coarse_atan_steps]
-	end
-	return coarse_atan[-coarse_atan_steps * dx // dy][-coarse_atan_steps]
 end
 assert(get_direction(1, 0) == 1)
 assert(get_direction(-1, 0) == 17)
@@ -2009,7 +2032,15 @@ local function maybe_respawn()
 				--   1822 (92%) respawned after checking just one object.
 				--   1982 (99%) respawned after checking one or two objects.
 				--   1987 (100%) respawned after checking three or fewer objects.
-				for v = respawn_kind, respawn_kind + 3 * (POPULATION_COUNT - 1), 3 do
+				--
+				-- Note that we always try to respawn a random object.  This is
+				-- so that if respawns happened more than once in the same game,
+				-- the new object will appear in a different spot, and won't be
+				-- immediately killed by any other object who happens to linger
+				-- around the previously respawn spot.
+				local offset <const> = rand(POPULATION_COUNT) - 1
+				for j = 0, POPULATION_COUNT - 1 do
+					local v <const> = (j + offset) % POPULATION_COUNT * 3 + respawn_kind
 					local obj = obj_table[v]
 					assert(obj.kind == respawn_kind)
 					assert(obj.state ~= STATE_LIVE)
