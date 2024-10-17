@@ -1467,6 +1467,7 @@ end
 
 -- Convert accelerometer readings from [-1,-1] range to rock velocities.
 local function convert_accelerometer_unit(v)
+	assert(v)
 	if v < 0 then
 		return -convert_accelerometer_unit(-v)
 	elseif v < ACCELEROMETER_DEADZONE then
@@ -1482,6 +1483,10 @@ end
 --
 -- Returns two integers in world coordinate units.
 local function get_rock_velocity(ax, ay, az)
+	if not (ax and ay and az) then
+		return 0, 0
+	end
+
 	assert(accelerometer_dx)
 	assert(accelerometer_dy)
 	assert(accelerometer_dz)
@@ -2683,9 +2688,15 @@ local function accelerometer_test()
 
 	gfx.drawText("*Accelerometer test*", 127, 48)
 	local ax <const>, ay <const>, az <const> = playdate.readAccelerometer()
-	gfx.drawText(string.format("x = %+.3f", ax), 92, 75)
-	gfx.drawText(string.format("y = %+.3f", ay), 92, 97)
-	gfx.drawText(string.format("z = %+.3f", az), 92, 119)
+	if ax and ay and az then
+		gfx.drawText(string.format("x = %+.3f", ax), 92, 75)
+		gfx.drawText(string.format("y = %+.3f", ay), 92, 97)
+		gfx.drawText(string.format("z = %+.3f", az), 92, 119)
+	else
+		gfx.drawText("x = ?", 92, 75)
+		gfx.drawText("y = ?", 92, 97)
+		gfx.drawText("z = ?", 92, 119)
+	end
 	gfx.drawText(string.format("(zero = %+.3f)", accelerometer_dx), 185, 75)
 	gfx.drawText(string.format("(zero = %+.3f)", accelerometer_dy), 185, 97)
 	gfx.drawText(string.format("(zero = %+.3f)", accelerometer_dz), 185, 119)
@@ -3084,6 +3095,11 @@ local function game_select()
 		-- Start init_world_thread if it hasn't started already.
 		async_init_world()
 
+		-- Dismiss any backdoor popups before leaving game_select state.
+		accelerometer_test_timer = 0
+		crank_test_timer = 0
+		population_test_timer = 0
+
 		-- Wait for world initialization to complete.
 		game_state = game_init
 		return
@@ -3265,7 +3281,12 @@ playdate.getSystemMenu():addMenuItem("zero tilt", function()
 	if not playdate.accelerometerIsRunning() then
 		playdate.startAccelerometer()
 	end
-	accelerometer_dx, accelerometer_dy, accelerometer_dz = playdate.readAccelerometer()
+	local ax <const>, ay <const>, az <const> = playdate.readAccelerometer()
+	if ax and ay and az then
+		accelerometer_dx = ax
+		accelerometer_dy = ay
+		accelerometer_dz = az
+	end
 	assert(debug_log(string.format("new zero=(%f, %f, %f)", accelerometer_dx, accelerometer_dy, accelerometer_dz)))
 end)
 
