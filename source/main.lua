@@ -391,7 +391,7 @@ local respawn_y = 0
 -- List of world coordinates that serves as initial object positions.
 --
 -- These initial positions are placed at 64 pixel intervals (8 cells).
--- Since objects have hit boxes of 16 pixels, so there are at least 48 pixels
+-- Since objects have hit boxes of 16 pixels, there are at least 48 pixels
 -- of space between any two initial positions.  Thus, there should always be
 -- room available for navigating around objects regardless of where we place
 -- them.
@@ -2774,7 +2774,6 @@ local function population_test()
 
 	gfx.drawText("*Set initial population*", 127, 54)
 	draw_population(population_limit, 139, 80)
-
 
 	local delta <const> = floor(playdate.getCrankChange() / 2)
 	if playdate.buttonIsPressed(playdate.kButtonUp) then

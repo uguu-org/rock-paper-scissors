@@ -29,7 +29,7 @@ my $pattern = shift @ARGV;
 my $layer_regex = qr/$pattern/;
 my $export_filename = shift @ARGV;
 
-# Load XML from stdin or first argument.
+# Load XML from stdin or last argument.
 my $dom = XML::LibXML->load_xml(huge => 1, string => join "", <ARGV>);
 
 # Iterate through all group nodes.
